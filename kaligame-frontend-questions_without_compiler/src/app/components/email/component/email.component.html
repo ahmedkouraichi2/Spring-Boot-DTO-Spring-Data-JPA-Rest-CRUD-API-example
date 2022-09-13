@@ -1,0 +1,121 @@
+
+<mat-card class="form-card" >
+<div class="container">
+    <div class="row">
+      <div class="offset-3"></div>
+      <div class="col-md-6">
+        <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()" novalidate class="feedback-form">
+          <!-- Name -->
+          <div class="input-group">
+            <div class="form-group" style="width: 50% ;">
+              <label for="name">Nom</label>
+              <input type="text"
+                     id="name"
+                     class="form-control"
+                     name="name"
+                     placeholder="nom du candidat"
+                     [(ngModel)]="details.name"
+                     #name="ngModel"
+                     [ngClass]="{ 'is-invalid': f.submitted && name.invalid }"
+                     required/>
+              <!-- input validation group -->
+              <div *ngIf="f.submitted && name.invalid" class="invalid-input">
+                <!-- individual validation errors -->
+                <div *ngIf="name.errors?.required">le nom est requis</div>
+              </div>
+            </div>
+             
+
+           <!-- prenom -->
+          <div class="form-group" style="width: 50%;">
+            <label for="prenom"> Prénom</label>
+            <input type="text"
+                   id="prenom"
+                   class="form-control"
+                   name="prenom"
+                   placeholder="prénom du candidat"
+                   [(ngModel)]="details.prenom"
+                   #prenom="ngModel"
+                   [ngClass]="{ 'is-invalid': f.submitted && prenom.invalid }"
+                   required/>
+            <!-- input validation group -->
+            <div *ngIf="f.submitted && prenom.invalid" class="invalid-input">
+              <!-- individual validation errors -->
+              <div *ngIf="name.errors?.required">le prénom  est requis</div>
+            </div>
+          </div>
+
+
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text"
+                   id="email"
+                   class="form-control"
+                   name="email"
+                   placeholder="email du candidat"
+                   [(ngModel)]="details.email"
+                   #email="ngModel"
+                   [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+                   required email/>
+            <!-- input validation group -->
+            <div *ngIf=" email.touched || email.invalid" class="invalid-input">
+              <!-- individual validation errors -->
+              <div *ngIf="email.errors?.required">Field is required</div>
+              <div *ngIf="email.errors?.email">email du candidat est requis</div>
+            </div>
+          </div>
+  
+          <!-- Feedback -->
+          <div class="form-group">
+            <label for="feedback">Technologies</label>
+            <ng-multiselect-dropdown
+              [placeholder]="'Select Domaine(s)'"
+              [settings]="dropdownSettings"
+              [data]="quarterList"
+              [(ngModel)]="selectedQuarterList"
+              (onSelect)="onItemSelect($event, true)"
+              (onDeSelect)="onItemSelect($event, false)"
+              name="lol"
+              #lol="ngModel"
+              style="height:60px ;"
+            >
+            </ng-multiselect-dropdown>
+  
+  
+            <!-- input validation group -->
+            <div *ngIf="f.submitted " class="invalid-input">
+              <!-- individual validation errors -->
+              <div *ngIf="lol.errors?.required  || lol.touched">Field is required</div>
+              <div *ngIf="lol.errors?.minlength">Field is too small (try 10 characters)</div>
+            </div>
+          </div>
+
+              <div class="flex-btn">
+                <button class="email-btn"  [disabled]="f.form.invalid" type="submit" style="width: 500px" >
+                   <h6 style="align-items: center;">
+                    <mat-icon>assignment_ind</mat-icon>
+                    <span>Envoyer</span>
+                   </h6>
+                </button>
+                <button class="email-btn" type="reset" style="width: 500px" >
+                   <h6>
+                    <mat-icon>all_out</mat-icon>
+                    <span>anuuler</span>
+                   </h6>
+                </button>
+              </div>
+        </form>
+      </div>
+      <div class="offset-3"></div>
+    </div>
+    </div>
+  </mat-card>
+  
+
+
+
+
+

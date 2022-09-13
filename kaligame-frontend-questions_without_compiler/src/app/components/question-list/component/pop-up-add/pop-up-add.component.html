@@ -1,0 +1,46 @@
+<div class="mat-card">  
+  <div mat-dialog-title class="dialog-header"  >
+    <span class="dialog-header-text">
+       Ajout Domaine
+    </span>
+    <button alt="clik" mat-button (click)="onNoClick()" style="left: 390px">
+      <i class="glyphicon glyphicon-remove"></i>
+    </button>
+  </div> 
+
+
+  <form
+     name="form"
+    (ngSubmit)="f.form.valid && save()"
+     #f="ngForm"
+     novalidate
+     >
+    <mat-form-field style="width: 100%" appearance="fill">
+    <mat-label>Domaine</mat-label>
+    <input  matInput style="font-size: 15px" placeholder="nom  de la Domaine"  [(ngModel)]="name"  name="d_name" #d_name="ngModel" 
+    required
+    minlength="3"
+    maxlength="20">
+    </mat-form-field>
+    <div class="alert-danger" *ngIf="d_name.errors?.required">
+      <div *ngIf="d_name.errors?.required &&  f.controls.d_name.touched">
+           <small> nom de la domaine estcest necessaire </small> 
+      </div>
+    </div>
+  
+    <div *ngIf="d_name.errors?.minlength">
+        <small>nom du domaine  doit plus long que 3 chiffre </small> 
+    </div>
+      <div *ngIf="d_name.errors.errors.maxlength">
+        First Name must be at most 20 characters
+      </div>
+  <button   type="submit" [disabled]="!f.form.valid"  style="margin-bottom: 10px; margin-left: 300px" class="btn btn-primary" (click)="save()">
+    Enregistrer
+  </button>
+
+
+
+
+
+
+
